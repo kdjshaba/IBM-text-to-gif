@@ -1,14 +1,27 @@
-import Navbar from "../components/Navbar";
 import TextToGif from "../components/TextToGif";
 import Footer from "../components/Footer";
 
+import { useAuthContext } from "../hooks/useAuthContext";
+
 //Main page
 function Index() {
+  
+  const {user} = useAuthContext()
+
   return (
     <div className="Index">
-      <Navbar />
-      <TextToGif />
-      <Footer />
+      {user && (
+        <div>
+          <TextToGif />
+          <Footer />
+        </div>
+      )}
+      {!user && (
+        <div class="welcoming-message">
+          <h1>Welcome!</h1>
+          <h3>Please login to start using the app</h3>
+        </div>
+      )}
     </div>
   );
 }

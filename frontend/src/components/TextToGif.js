@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import History from "../components/History";
+import { useAuthContext } from '../hooks/useAuthContext'
 
 //Component for text-to-gif search and history
 function TextToGif(){
@@ -8,6 +9,7 @@ function TextToGif(){
     const [error, setError] = useState(null)
     const [imageUrl, setImageUrl] = useState(null)
     const [reset, setReset] = useState(false)
+    const { user } = useAuthContext()
 
     const textInputJSON = {"text": textInput}
 
@@ -15,11 +17,17 @@ function TextToGif(){
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
+
         const response = await fetch(process.env.REACT_APP_BACKEND_URL, {
             method: 'POST',
             body: JSON.stringify(textInputJSON),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         
@@ -47,7 +55,7 @@ function TextToGif(){
             <form className="inputStringForm" onSubmit={handleSubmit}>
                 <label htmlFor="inputText">Text:</label>
                 <textarea id="inputText" placeholder="Input text:" onChange={(e) => setTextInput(e.target.value)} value={textInput}></textarea>
-                <button>Generate</button>
+                <button className="submit-button">Generate</button>
             </form>
             {error && <div className="error">{error}</div>}
 

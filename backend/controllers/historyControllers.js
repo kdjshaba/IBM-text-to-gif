@@ -8,7 +8,7 @@ const getGifUrl = async (req, res) => {
   try{
     const category = await watson.textCategory(req.body.text);
     const gifUrl = await giphy.getGif(category);
-    const log = await history.addHistory(gifUrl);
+    const log = await history.addHistory(gifUrl, req.user._id);
     res.json({"gifUrl" : gifUrl});
   } catch(err){
     err = await watson.checkErr(err)
@@ -21,7 +21,7 @@ const getGifUrl = async (req, res) => {
 const getAllLogs = async (req, res) => {
   
   try{
-    const logs = await history.getLogs()
+    const logs = await history.getLogs(req.user._id)
     res.json(logs)
   } catch(err){
     res.status(400).json({ error: err.message })

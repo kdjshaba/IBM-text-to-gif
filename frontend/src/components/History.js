@@ -1,12 +1,18 @@
 import {useEffect, useState } from "react"
+import { useAuthContext } from '../hooks/useAuthContext'
 
 //Component for getting user's search log history
 function History(props){
     const [historyGifs, setHistoryGifs] = useState(null)
+    const { user } = useAuthContext()
 
     //Function for fetching search logs through backend
     const fetchGifs = async () => {
-        const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/logs')
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/logs', {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await response.json()
 
         if (response.ok){

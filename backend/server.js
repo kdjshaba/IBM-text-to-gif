@@ -4,14 +4,15 @@ require('dotenv').config()
 const express = require("express");
 const cors = require('cors');
 const mongoose = require("mongoose");
-const mainRoutes = require('./routes/routes');
+const mainRoutes = require('./routes/mainRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // express app
 const app = express();
 
-//Options for CORS
+//Settings for CORS
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
     optionsSuccessStatus: 200
 };
@@ -31,5 +32,6 @@ mongoose.connect(process.env.MONGO_URL)
     })
     .catch(err => console.log(err))
 
-// add all routes from routes.js
+// routes
+app.use('/user', userRoutes);
 app.use('/', mainRoutes);
