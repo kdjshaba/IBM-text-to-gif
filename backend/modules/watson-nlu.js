@@ -29,7 +29,7 @@ async function textCategory(text){
 
   //If there is more than one category, it will split them into array and leave only one
   const categoriesArray =  categories.split('/');
-  const category = categoriesArray.find(element => {return element !== ''})
+  const category = categoriesArray.slice(-1)[0] 
 
   return(category)
 };

@@ -2,10 +2,10 @@ const HistoryLog = require('../models/historyModel');
 const mongoose = require('mongoose');
 
 // Add new log to db
-const addHistory = async (gifUrl, user_id) => {
+const addHistory = async (gifUrl, user_id, category) => {
     console.log(user_id)
     try{
-        const history = await HistoryLog.create({gifUrl, user_id});
+        const history = await HistoryLog.create({gifUrl, user_id, category});
         console.log('added new history log: ', history);
     } catch (error){
         console.log('Error, could not add new history log to db: ', error.message)

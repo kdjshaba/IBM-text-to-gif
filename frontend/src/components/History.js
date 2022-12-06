@@ -32,7 +32,7 @@ function History(props){
             <div className="history-gifs">
                 {historyGifs && historyGifs.map(gif => (
                     <div key={gif._id}>
-                        <img className="gif" src={gif.gifUrl}></img>
+                        <img className="gif" src={gif.gifUrl} alt={gif.category} ></img>
                     </div>
                 ))}
                 
