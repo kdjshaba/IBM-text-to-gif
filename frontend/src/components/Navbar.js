@@ -53,7 +53,6 @@ function Navbar() {
           <Link to="/" className='a-button'>Home</Link>
           <Link to="/login" className='a-button'>Login</Link>
           <Link to="/signup" className='a-button'>Signup</Link>
-          <button className='a-button logout' onClick={handleClick}>Logout</button>
         </div>
       )}
       {user && (

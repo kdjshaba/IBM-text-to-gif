@@ -17,7 +17,7 @@ function Index() {
         </div>
       )}
       {!user && (
-        <div class="welcoming-message">
+        <div className="welcoming-message">
           <h1>Welcome!</h1>
           <h3>Please login to start using the app</h3>
         </div>
