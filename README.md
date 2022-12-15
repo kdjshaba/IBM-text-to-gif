@@ -1,8 +1,8 @@
 # IBM-text-to-gif
 ## How to build and run app
 ### 1) Access app through public url
-https://text-to-gif-ysaxtq5haq-lm.a.run.app/
-<br>App is deployed on google cloud run
+https://text-to-gif.azurewebsites.net/
+<br>App is deployed on azure cloud
 ### 2) Access app through github and run locally
 You must have node installed in you computer<br>
 <br>
